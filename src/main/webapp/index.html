@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Scalangular</title>
+</head>
+<body>
+<div ng-controller="usrCtrl as ctrl">
+    Count: {{ctrl.count}}
+    <button ng-click="ctrl.inc()">+</button>
+    <button ng-click="ctrl.dec()">-</button>
+</div>
+</body>
+<script src="/js/angular/angular.js"></script>
+<script src="/js/test.js"></script>
+<script>
+    at.bayava.scalangular.ScalangularApp().main();
+</script>
+</html>

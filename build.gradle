@@ -1,0 +1,77 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.gtache:scalajs-plugin:0.2.0'
+    }
+}
+
+plugins {
+    id 'com.craigburke.bower-installer' version '2.5.1'
+}
+
+group 'at.bayava'
+version '1.0-SNAPSHOT'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'scala'
+apply plugin: 'scalajs-plugin'
+apply plugin: 'idea'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+configurations {
+    provided
+    compile.extendsFrom provided
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+bower {
+    'angular'('1.5.x') {
+        source 'angular.js'
+    }
+}
+
+ext {
+    output = "${buildDir}/js/test.js"
+}
+
+war {
+    from("${buildDir}/js") {
+        include '**/*'
+        into('js')
+    }
+    from("src/assets/bower") {
+        include '**/*'
+        into('js')
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+war.dependsOn 'bowerInstall', 'FastOptJS'
+
+dependencies {
+    provided 'biz.enef:scalajs-angulate_sjs0.6_2.11:0.2.+'
+    compile 'org.scala-lang:scala-dist:2.11.+'
+    compile 'com.typesafe.scala-logging:scala-logging_2.11:3.4.+'
+    compile 'org.apache.logging.log4j:log4j-core:2.+'
+    compile 'org.apache.logging.log4j:log4j-web:2.+'
+}
