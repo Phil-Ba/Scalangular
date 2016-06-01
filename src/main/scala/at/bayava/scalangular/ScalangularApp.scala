@@ -11,7 +11,7 @@ import scala.scalajs.js.JSApp
 object ScalangularApp extends JSApp {
 
 	def main() = {
-		val module = angular.createModule("app")
+		val module = angular.createModule("app", Seq("ui.bootstrap"))
 //		val module = angular.createModule("app", Seq("ui.bootstrap", "ngRoute"))
 
 		//	module.serviceOf[UserService]

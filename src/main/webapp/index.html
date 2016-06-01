@@ -2,16 +2,33 @@
 <html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Scalangular</title>
+    <link href="js/bootstrap-css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div ng-controller="usrCtrl as ctrl">
-    Count: {{ctrl.count}}
-    <button ng-click="ctrl.inc()">+</button>
-    <button ng-click="ctrl.dec()">-</button>
+<div class="container">
+    <div ng-controller="usrCtrl as ctrl">
+        Count: {{ctrl.count}}
+        <button data-ng-click="ctrl.inc()">+</button>
+        <button data-ng-click="ctrl.dec()">-</button>
+
+        <div class="form-group">
+            <label>Last Name</label>
+            <input ng-model="ctrl.user.lastName" title="lastName" class="form-control"/>
+            <label>Name</label>
+            <input ng-model="ctrl.user.name" title="Name" class="form-control"/>
+        </div>
+
+        Name={{ctrl.user.name}}
+        LastName={{ctrl.user.lastName}}
+    </div>
 </div>
 </body>
+
 <script src="/js/angular/angular.js"></script>
+<script src="/js/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="/js/test.js"></script>
 <script>
     at.bayava.scalangular.ScalangularApp().main();
